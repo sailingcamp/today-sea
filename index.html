@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>今日の海</title>
-  <link rel="stylesheet" href="style.css">
+<title>今日の海</title>
+<meta name="theme-color" content="#0ea5c6">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -82,6 +84,15 @@
     </section>
   </main>
 
-  <script src="app.js"></script>
+<script src="app.js"></script>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js");
+    });
+  }
+</script>
+
 </body>
 </html>
