@@ -418,8 +418,35 @@ function buildNextHours(hourly, startIndex, count) {
 }
 
 function drawLineChart(canvasId, data, key, unit) {
+
   const canvas = document.getElementById(canvasId);
+
+  if (!canvas) {
+    console.log(canvasId + " not found");
+    return;
+  }
+
   const ctx = canvas.getContext("2d");
+
+  if (!ctx) {
+    console.log(canvasId + " no context");
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    return;
+  }
+
+  data = data.filter(item =>
+    item &&
+    item[key] !== null &&
+    item[key] !== undefined &&
+    !isNaN(item[key])
+  );
+
+  if (data.length === 0) {
+    return;
+  }
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
