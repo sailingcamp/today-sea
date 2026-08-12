@@ -338,22 +338,65 @@ function renderMemo(weather, marine) {
 }
 
 function createUmiikuMemo(weather, marine) {
-const daylightRisk =
-  getDaylightRisk(
-    weather.sunrise,
-    weather.sunset
-  );
+  const daylightRisk =
+    getDaylightRisk(
+      weather.sunrise,
+      weather.sunset
+    );
+
   const wind = weather.windSpeed;
   const temp = weather.temperature;
   const wave = marine.waveHeight;
   const sunset = weather.sunset;
 
-  const futureWind = weather.nextHours.map(item => item.windSpeed).filter(v => v !== null);
+  // 活動時間外は、海況分析より先に専用メッセージを返す
+  if (daylightRisk.prohibited) {
+
+    if (daylightRisk.label.includes("日の出前")) {
+      return `
+まだ活動時間前です。
+
+現在の海況は参考情報としてご覧ください。
+
+日の出後も風や波は変化する可能性があります。
+
+出艇前には最新の海況を確認し、安全を最優先に判断しましょう。
+`.trim();
+    }
+
+    if (daylightRisk.label.includes("日没1時間以内")) {
+      return `
+本日の海の活動時間は残りわずかです。
+
+安全のため、新たな出艇はおすすめしません。
+
+明日の風速・風向・降水予報も確認しながら、次回の活動計画を立てておきましょう。
+`.trim();
+    }
+
+    if (daylightRisk.label.includes("日没後")) {
+      return `
+本日の海の活動時間は終了しました。
+
+夜間は海況の変化を確認しにくくなるため、海上活動は行わないようにしましょう。
+
+明日の海況を確認し、次回の活動準備を進めておくと安心です。
+`.trim();
+    }
+  }
+
+  const futureWind = weather.nextHours
+    .map(item => item.windSpeed)
+    .filter(v => v !== null);
+
   const maxFutureWind = Math.max(...futureWind);
   const minFutureWind = Math.min(...futureWind);
   const windChange = round(maxFutureWind - minFutureWind);
 
-  const futureDirections = weather.nextHours.map(item => item.windDirection).filter(v => v !== null);
+  const futureDirections = weather.nextHours
+    .map(item => item.windDirection)
+    .filter(v => v !== null);
+
   const directionChange = calculateDirectionChange(futureDirections);
 
   let parts = [];
