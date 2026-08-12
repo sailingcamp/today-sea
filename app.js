@@ -9,12 +9,12 @@ const PRESET_LOCATIONS = {
     name: "江の島（Ｂ１海面）",
     latitude: 35.2870,
     longitude: 139.5120
-  }
+  },
   zamami: {
     name: "座間味（阿真）",
     latitude: 26.224728,
     longitude: 127.290709
-  }
+  },
 };
 
 const DEFAULT_LOCATION =
