@@ -438,39 +438,88 @@ function buildNextHours(hourly, startIndex, count) {
   return result;
 }
 
-function drawChart(canvasId, labels, values, label, color) {
+let chartInstances = {};
 
+function drawChart(canvasId, labels, values, label, color) {
   const canvas = document.getElementById(canvasId);
 
-  if (!canvas) return;
+  if (!canvas) {
+    console.log(canvasId + " が見つかりません");
+    return;
+  }
 
-  new Chart(canvas, {
+  if (typeof Chart === "undefined") {
+    console.log("Chart.js が読み込まれていません");
+    return;
+  }
 
+  const cleanLabels = [];
+  const cleanValues = [];
+
+  labels.forEach((labelText, index) => {
+    const value = values[index];
+
+    if (
+      value !== null &&
+      value !== undefined &&
+      !Number.isNaN(Number(value))
+    ) {
+      cleanLabels.push(labelText);
+      cleanValues.push(Number(value));
+    }
+  });
+
+  if (cleanValues.length === 0) {
+    console.log(canvasId + " に描画できるデータがありません");
+    return;
+  }
+
+  if (chartInstances[canvasId]) {
+    chartInstances[canvasId].destroy();
+  }
+
+  chartInstances[canvasId] = new Chart(canvas, {
     type: "line",
-
     data: {
-      labels: labels,
-      datasets: [{
-        label: label,
-        data: values,
-        borderColor: color,
-        backgroundColor: color,
-        tension: 0.3
-      }]
+      labels: cleanLabels,
+      datasets: [
+        {
+          label: label,
+          data: cleanValues,
+          borderColor: color,
+          backgroundColor: color,
+          tension: 0.35,
+          borderWidth: 3,
+          pointRadius: 4,
+          pointHoverRadius: 6
+        }
+      ]
     },
-
     options: {
       responsive: true,
-
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           display: false
         }
       },
-
       scales: {
+        x: {
+          ticks: {
+            color: "#55788a"
+          },
+          grid: {
+            color: "#e2f3f8"
+          }
+        },
         y: {
-          beginAtZero: false
+          beginAtZero: false,
+          ticks: {
+            color: "#55788a"
+          },
+          grid: {
+            color: "#e2f3f8"
+          }
         }
       }
     }
