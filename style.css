@@ -188,6 +188,7 @@ button {
 
 .chart-card {
   height: 220px;
+  overflow: hidden;
 }
 
 .chart-card canvas {
@@ -267,6 +268,7 @@ button {
 
   .chart-card {
     height: 190px;
+    overflow: hidden;
   }
 
   .chart-card canvas {
