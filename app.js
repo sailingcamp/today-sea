@@ -16,8 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
   updateTime();
 
   document.getElementById("gpsButton").addEventListener("click", loadWithGps);
-  document.getElementById("hayamaButton").addEventListener("click", () => {
-    loadSeaData(DEFAULT_LOCATION);
+document
+  .getElementById("locationSelect")
+  .addEventListener("change", e => {
+
+    const location =
+      PRESET_LOCATIONS[e.target.value];
+
+    loadSeaData(location);
   });
 
   loadSeaData(DEFAULT_LOCATION);
