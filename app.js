@@ -1,7 +1,7 @@
 const DEFAULT_LOCATION = {
-  name: "葉山",
-  latitude: 35.2842,
-  longitude: 139.5658
+  name: "葉山（E海面）",
+  latitude: 35.2792,
+  longitude: 139.5533
 };
 
 document.addEventListener("DOMContentLoaded", () => {
