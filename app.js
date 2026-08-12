@@ -217,11 +217,28 @@ function renderSeaScore(weather, marine) {
 }
 
 function calculateSeaScore(weather, marine) {
+  const daylightRisk = getDaylightRisk(weather.sunrise, weather.sunset);
+
+  // 日の出前・日没後・日没1時間以内は強制的に出艇禁止
+  if (daylightRisk.prohibited) {
+    return {
+      score: 0,
+      label: daylightRisk.label
+    };
+  }
+
   let score = 100;
 
   const wind = weather.windSpeed;
   const wave = marine.waveHeight;
   const temp = weather.temperature;
+
+  const rainNow = Number(weather.precipitationNow);
+  const rain3h = Number(weather.precipitation3h);
+  const rainMax = Math.max(
+    Number.isNaN(rainNow) ? 0 : rainNow,
+    Number.isNaN(rain3h) ? 0 : rain3h
+  );
 
   if (wind === null || wind === undefined) {
     return {
@@ -230,6 +247,7 @@ function calculateSeaScore(weather, marine) {
     };
   }
 
+  // 風速
   if (wind < 2) {
     score -= 8;
   } else if (wind < 6) {
@@ -242,6 +260,7 @@ function calculateSeaScore(weather, marine) {
     score -= 60;
   }
 
+  // 波高
   if (wave !== null && wave !== undefined) {
     if (wave >= 1.5) {
       score -= 25;
@@ -252,6 +271,16 @@ function calculateSeaScore(weather, marine) {
     }
   }
 
+  // 降水確率 現在と3時間後の高い方で判定
+  if (rainMax >= 80) {
+    score -= 25;
+  } else if (rainMax >= 50) {
+    score -= 15;
+  } else if (rainMax >= 30) {
+    score -= 8;
+  }
+
+  // 気温
   if (temp >= 32) {
     score -= 12;
   } else if (temp >= 30) {
@@ -260,14 +289,28 @@ function calculateSeaScore(weather, marine) {
     score -= 10;
   }
 
-  const futureWinds = weather.nextHours.map(item => item.windSpeed).filter(v => v !== null);
-  const maxFutureWind = Math.max(...futureWinds);
-  const windIncrease = maxFutureWind - wind;
+  // 今後数時間の風速上昇
+  const futureWinds = weather.nextHours
+    .map(item => item.windSpeed)
+    .filter(v => v !== null && v !== undefined);
 
-  if (windIncrease >= 4) {
-    score -= 15;
-  } else if (windIncrease >= 2.5) {
-    score -= 8;
+  if (futureWinds.length > 0) {
+    const maxFutureWind = Math.max(...futureWinds);
+    const windIncrease = maxFutureWind - wind;
+
+    if (windIncrease >= 4) {
+      score -= 15;
+    } else if (windIncrease >= 2.5) {
+      score -= 8;
+    }
+  }
+
+  // 日没までの残り時間による減点
+  // 60分以内はすでに出艇禁止
+  if (daylightRisk.minutesToSunset <= 120) {
+    score -= 25;
+  } else if (daylightRisk.minutesToSunset <= 180) {
+    score -= 10;
   }
 
   score = Math.max(0, Math.min(100, Math.round(score)));
