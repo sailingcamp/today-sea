@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>今日の海</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="app">
+    <section class="hero">
+      <p class="label">海育プロジェクト</p>
+      <h1>今日の海</h1>
+      <p class="place">葉山</p>
+      <p class="time" id="currentTime">--</p>
+    </section>
+
+    <section class="dashboard">
+      <div class="card">
+        <h2>🌤 天気</h2>
+        <p>気温：<span id="temperature">--</span></p>
+        <p>日没：<span id="sunset">--</span></p>
+      </div>
+
+      <div class="card">
+        <h2>🌬 風</h2>
+        <p>平均風速：<span id="windSpeed">--</span></p>
+        <p>風向：<span id="windDirection">--</span></p>
+      </div>
+
+      <div class="card">
+        <h2>🌊 潮</h2>
+        <p>潮名：<span id="tideName">中潮</span></p>
+        <p>満潮：<span id="highTide">09:24</span></p>
+        <p>干潮：<span id="lowTide">15:48</span></p>
+      </div>
+
+      <div class="card memo">
+        <h2>📝 海育メモ</h2>
+        <p id="memoText">海の状況を確認しています。</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
