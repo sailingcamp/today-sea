@@ -148,9 +148,10 @@ function renderCurrent(weather, marine) {
   document.getElementById("windSpeed").textContent = valueOrDash(weather.windSpeed);
   document.getElementById("windGust").textContent =
   `最大 ${valueOrDash(weather.windGust)} m/s`;
-  document.getElementById("windDirection").textContent = valueOrDash(weather.windDirection);
-  document.getElementById("windDirectionText").textContent =
-    `${degreeToDirection(weather.windDirection)} / ${weather.windDirection}°`;
+document.getElementById("windDirection").textContent =
+  degreeToDirection(weather.windDirection);
+document.getElementById("windDirectionText").textContent =
+  `${weather.windDirection}°`;
   document.getElementById("temperature").textContent = valueOrDash(weather.temperature);
   document.getElementById("waveHeight").textContent = valueOrDash(marine.waveHeight);
   document.getElementById("sunset").textContent = weather.sunset || "--:--";
