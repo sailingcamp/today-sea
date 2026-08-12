@@ -106,6 +106,18 @@ button {
   background: white;
 }
 
+#locationSelect {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 13px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #087c95;
+  background: white;
+  box-sizing: border-box;
+}
+
 /* Dashboard tiles */
 
 .dashboard {
