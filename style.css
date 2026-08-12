@@ -175,12 +175,12 @@ button {
 }
 
 .chart-card {
-  height: 280px;
+  height: 220px;
 }
 
 .chart-card canvas {
   width: 100% !important;
-  height: 220px !important;
+  height: 140px !important;
 }
 
 /* Smartphone layout: keep 3 x 2 tiles */
@@ -254,11 +254,11 @@ button {
   }
 
   .chart-card {
-    height: 240px;
+    height: 190px;
   }
 
   .chart-card canvas {
     width: 100% !important;
-    height: 180px !important;
+    height: 120px !important;
   }
 }
