@@ -473,6 +473,66 @@ function getDaylightStatus(sunriseStr, sunsetStr) {
   };
 }
 
+function getDaylightRisk(sunriseStr, sunsetStr) {
+  if (!sunriseStr || !sunsetStr) {
+    return {
+      prohibited: false,
+      label: "",
+      minutesToSunset: 999
+    };
+  }
+
+  const now = new Date();
+
+  const [sunriseHour, sunriseMin] =
+    sunriseStr.split(":").map(Number);
+
+  const [sunsetHour, sunsetMin] =
+    sunsetStr.split(":").map(Number);
+
+  const sunrise = new Date();
+  sunrise.setHours(sunriseHour, sunriseMin, 0, 0);
+
+  const sunset = new Date();
+  sunset.setHours(sunsetHour, sunsetMin, 0, 0);
+
+  // 日の出前
+  if (now < sunrise) {
+    return {
+      prohibited: true,
+      label: "出艇禁止（日の出前）",
+      minutesToSunset: 999
+    };
+  }
+
+  // 日没後
+  if (now >= sunset) {
+    return {
+      prohibited: true,
+      label: "出艇禁止（日没後）",
+      minutesToSunset: 0
+    };
+  }
+
+  const minutesToSunset =
+    Math.floor((sunset - now) / 60000);
+
+  // 日没1時間以内
+  if (minutesToSunset <= 60) {
+    return {
+      prohibited: true,
+      label: "出艇禁止（日没1時間以内）",
+      minutesToSunset: minutesToSunset
+    };
+  }
+
+  return {
+    prohibited: false,
+    label: "",
+    minutesToSunset: minutesToSunset
+  };
+}
+
 function buildNextHours(hourly, startIndex, count) {
   const result = [];
 
