@@ -366,6 +366,8 @@ function calculateDirectionChange(directions) {
 
 function getDaylightStatus(sunriseStr, sunsetStr) {
 
+function getDaylightStatus(sunriseStr, sunsetStr) {
+
   const now = new Date();
 
   const [sunriseHour, sunriseMin] =
@@ -380,7 +382,6 @@ function getDaylightStatus(sunriseStr, sunsetStr) {
   const sunset = new Date();
   sunset.setHours(sunsetHour, sunsetMin, 0, 0);
 
-  // 日の出前
   if (now < sunrise) {
 
     const diff =
@@ -390,12 +391,11 @@ function getDaylightStatus(sunriseStr, sunsetStr) {
     const m = diff % 60;
 
     return {
-      title: `日の出まで`,
-      detail: `${h}時間${m}分`
+      countdown: `あと${h}時間${m}分`,
+      info: `日の出 ${sunriseStr}`
     };
   }
 
-  // 日中
   if (now < sunset) {
 
     const diff =
@@ -405,12 +405,10 @@ function getDaylightStatus(sunriseStr, sunsetStr) {
     const m = diff % 60;
 
     return {
-      title: `活動可能`,
-      detail: `あと${h}時間${m}分`
+      countdown: `あと${h}時間${m}分`,
+      info: `日没 ${sunsetStr}`
     };
   }
-
-  // 日没後
 
   const diff =
     Math.floor((now - sunset) / 60000);
@@ -419,8 +417,8 @@ function getDaylightStatus(sunriseStr, sunsetStr) {
   const m = diff % 60;
 
   return {
-    title: `夜間`,
-    detail: `${h}時間${m}分経過`
+    countdown: `${h}時間${m}分経過`,
+    info: `日の出 ${sunriseStr}`
   };
 }
 
