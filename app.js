@@ -675,15 +675,17 @@ function drawChart(canvasId, labels, values, label, color) {
             color: "#e2f3f8"
           }
         },
-        y: {
-          beginAtZero: false,
-          ticks: {
-            color: "#55788a"
-          },
-          grid: {
-            color: "#e2f3f8"
-          }
-        }
+y: {
+  min: 0,
+  max: Math.ceil(Math.max(...cleanValues)),
+  ticks: {
+    stepSize: 1,
+    color: "#55788a"
+  },
+  grid: {
+    color: "#e2f3f8"
+  }
+}
       }
     }
   });
