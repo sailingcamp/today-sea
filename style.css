@@ -61,23 +61,22 @@ button {
 
 .dashboard {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
   margin-top: 16px;
 }
 
 .card {
   background: white;
-  border-radius: 18px;
-  padding: 14px;
-
-  min-height: 135px;
+  border-radius: 16px;
+  padding: 12px;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
 
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  min-height: 120px;
+
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
 }
 
 .card h2,
