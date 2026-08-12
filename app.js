@@ -87,7 +87,7 @@ async function fetchWeather(latitude, longitude) {
    hourly: "temperature_2m,wind_speed_10m,wind_direction_10m,precipitation_probability",
     daily: "sunrise,sunset",
     timezone: "Asia/Tokyo",
-    forecast_days: "1",
+    forecast_days: "2",
     wind_speed_unit: "ms"
   });
 
