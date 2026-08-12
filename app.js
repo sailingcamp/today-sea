@@ -1,7 +1,15 @@
-const DEFAULT_LOCATION = {
-  name: "葉山（E海面）",
-  latitude: 35.2792,
-  longitude: 139.5533
+const PRESET_LOCATIONS = {
+  hayama: {
+    name: "葉山（E海面）",
+    latitude: 35.2792,
+    longitude: 139.5533
+  },
+
+  enoshima: {
+    name: "江の島（Ｂ１海面）",
+    latitude: 35.2870,
+    longitude: 139.5120
+  }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
