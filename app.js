@@ -190,6 +190,9 @@ function renderCurrent(weather, marine) {
       ? `${weather.windDirection}°`
       : "--";
 
+  document.getElementById("temperature").textContent =
+    valueOrDash(weather.temperature);
+
   document.getElementById("precipitation").textContent =
     `${valueOrDash(weather.precipitationNow)} → ${valueOrDash(weather.precipitation3h)}`;
 
