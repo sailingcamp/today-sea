@@ -102,7 +102,7 @@ async function fetchWeather(latitude, longitude) {
 
   const currentTime = data.current.time;
   const currentIndex = findCurrentIndex(data.hourly.time, currentTime);
-  const nextHours = buildNextHours(data.hourly, currentIndex, 5);
+  const nextHours = buildNextHours(data.hourly, currentIndex, 6);
 
 return {
   temperature: round(data.current.temperature_2m),
