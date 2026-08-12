@@ -128,10 +128,9 @@ canvas {
     padding: 12px;
   }
 
-  .dashboard {
+.dashboard {
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
+}
 
   .card {
     padding: 14px;
