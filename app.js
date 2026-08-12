@@ -69,8 +69,29 @@ async function loadSeaData(location) {
 
     renderCurrent(weather, marine);
     renderMemo(weather, marine);
-    drawLineChart("windSpeedChart", weather.nextHours, "windSpeed", "m/s");
-    drawLineChart("windDirectionChart", weather.nextHours, "windDirection", "°");
+drawChart(
+  "windSpeedChart",
+
+  weather.nextHours.map(x => x.time),
+
+  weather.nextHours.map(x => x.windSpeed),
+
+  "風速",
+
+  "#0ea5c6"
+);
+
+drawChart(
+  "windDirectionChart",
+
+  weather.nextHours.map(x => x.time),
+
+  weather.nextHours.map(x => x.windDirection),
+
+  "風向",
+
+  "#f59e0b"
+);
 
     setStatus("更新しました");
   } catch (error) {
@@ -417,98 +438,43 @@ function buildNextHours(hourly, startIndex, count) {
   return result;
 }
 
-function drawLineChart(canvasId, data, key, unit) {
+function drawChart(canvasId, labels, values, label, color) {
 
   const canvas = document.getElementById(canvasId);
 
-  if (!canvas) {
-    console.log(canvasId + " not found");
-    return;
-  }
+  if (!canvas) return;
 
-  const ctx = canvas.getContext("2d");
+  new Chart(canvas, {
 
-  if (!ctx) {
-    console.log(canvasId + " no context");
-    return;
-  }
+    type: "line",
 
-  if (!data || data.length === 0) {
-    return;
-  }
+    data: {
+      labels: labels,
+      datasets: [{
+        label: label,
+        data: values,
+        borderColor: color,
+        backgroundColor: color,
+        tension: 0.3
+      }]
+    },
 
-  data = data.filter(item =>
-    item &&
-    item[key] !== null &&
-    item[key] !== undefined &&
-    !isNaN(item[key])
-  );
+    options: {
+      responsive: true,
 
-  if (data.length === 0) {
-    return;
-  }
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  if (!data || data.length === 0) {
-    return;
-  }
-
-  const padding = 42;
-  const width = canvas.width - padding * 2;
-  const height = canvas.height - padding * 2;
-
-  const values = data.map(item => item[key]);
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const range = max - min || 1;
-
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = "#d6eef5";
-
-  for (let i = 0; i <= 4; i++) {
-    const y = padding + (height / 4) * i;
-    ctx.beginPath();
-    ctx.moveTo(padding, y);
-    ctx.lineTo(canvas.width - padding, y);
-    ctx.stroke();
-  }
-
-  ctx.strokeStyle = "#0ea5c6";
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-
-  data.forEach((item, index) => {
-    const x = padding + (width / (data.length - 1 || 1)) * index;
-    const y = padding + height - ((item[key] - min) / range) * height;
-
-    if (index === 0) {
-      ctx.moveTo(x, y);
-    } else {
-      ctx.lineTo(x, y);
+      scales: {
+        y: {
+          beginAtZero: false
+        }
+      }
     }
   });
-
-  ctx.stroke();
-
-  ctx.fillStyle = "#06394a";
-  ctx.font = "18px system-ui";
-
-  data.forEach((item, index) => {
-    const x = padding + (width / (data.length - 1 || 1)) * index;
-    const y = padding + height - ((item[key] - min) / range) * height;
-
-    ctx.beginPath();
-    ctx.arc(x, y, 5, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.fillText(String(item[key]), x - 12, y - 12);
-    ctx.fillText(item.time, x - 20, canvas.height - 12);
-  });
-
-  ctx.fillStyle = "#55788a";
-  ctx.font = "15px system-ui";
-  ctx.fillText(unit, 8, 24);
 }
 
 function findCurrentIndex(times, currentTime) {
