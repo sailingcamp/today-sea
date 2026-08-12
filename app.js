@@ -317,20 +317,22 @@ function renderMemo(weather, marine) {
   try {
     const memo = createUmiikuMemo(weather, marine);
 
+    console.log("memo", memo);
+
     document.getElementById("memoText").textContent =
-      memo && memo.trim()
-        ? memo
-        : "海況コメントを生成できませんでした。風・波・降水・活動時間を確認し、安全を最優先に判断してください。";
+      memo || "メモなし";
 
   } catch (error) {
     console.error("Memo error", error);
 
     document.getElementById("memoText").textContent =
-      "海況コメントを生成できませんでした。風・波・降水・活動時間を確認し、安全を最優先に判断してください。";
+      "海況コメントを生成できませんでした。";
   }
 }
 
 function createUmiikuMemo(weather, marine) {
+console.log("weather", weather);
+console.log("marine", marine);
   const daylightRisk =
     getDaylightRisk(
       weather.sunrise,
