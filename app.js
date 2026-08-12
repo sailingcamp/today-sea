@@ -15,7 +15,6 @@ const PRESET_LOCATIONS = {
 document.addEventListener("DOMContentLoaded", () => {
   updateTime();
 
-  document.getElementById("gpsButton").addEventListener("click", loadWithGps);
 document
   .getElementById("locationSelect")
   .addEventListener("change", e => {
@@ -40,37 +39,6 @@ function updateTime() {
       hour: "2-digit",
       minute: "2-digit"
     });
-}
-
-function loadWithGps() {
-  setStatus("現在地を確認しています");
-
-  if (!navigator.geolocation) {
-    setStatus("GPSが使えないため、葉山を表示します");
-    loadSeaData(DEFAULT_LOCATION);
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-    position => {
-      const location = {
-        name: "現在地",
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-      };
-
-      loadSeaData(location);
-    },
-    () => {
-      setStatus("位置情報が許可されなかったため、葉山を表示します");
-      loadSeaData(DEFAULT_LOCATION);
-    },
-    {
-      enableHighAccuracy: true,
-      timeout: 8000,
-      maximumAge: 600000
-    }
-  );
 }
 
 async function loadSeaData(location) {
