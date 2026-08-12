@@ -87,7 +87,7 @@ async function fetchWeather(latitude, longitude) {
     longitude: longitude,
     current: "temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m",
     hourly: "temperature_2m,wind_speed_10m,wind_direction_10m",
-    daily: "sunset",
+    daily: "sunrise,sunset",
     timezone: "Asia/Tokyo",
     forecast_days: "1",
     wind_speed_unit: "ms"
@@ -111,6 +111,7 @@ return {
   windSpeed: round(data.current.wind_speed_10m),
   windGust: round(data.current.wind_gusts_10m),
   windDirection: data.current.wind_direction_10m,
+  sunrise: formatTime(data.daily.sunrise[0]),
   sunset: formatTime(data.daily.sunset[0]),
   nextHours: nextHours
 };
