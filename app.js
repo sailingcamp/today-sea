@@ -133,7 +133,7 @@ async function fetchMarine(latitude, longitude) {
     longitude: longitude,
     hourly: "wave_height",
     timezone: "Asia/Tokyo",
-    forecast_days: "1"
+    forecast_days: "2"
   });
 
   const url = `https://marine-api.open-meteo.com/v1/marine?${params.toString()}`;
