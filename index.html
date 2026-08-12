@@ -12,34 +12,73 @@
     <section class="hero">
       <p class="label">海育プロジェクト</p>
       <h1>今日の海</h1>
-      <p class="place">葉山</p>
+      <p class="place" id="placeName">葉山</p>
       <p class="time" id="currentTime">--</p>
+      <p class="status" id="statusText">海の状況を確認しています</p>
+
+      <div class="buttons">
+        <button id="gpsButton">現在地で見る</button>
+        <button id="hayamaButton">葉山で見る</button>
+      </div>
     </section>
 
     <section class="dashboard">
       <div class="card">
-        <h2>🌤 天気</h2>
-        <p>気温：<span id="temperature">--</span></p>
-        <p>日没：<span id="sunset">--</span></p>
+        <h2>風速</h2>
+        <p class="main-value" id="windSpeed">--</p>
+        <p class="unit">m/s</p>
       </div>
 
       <div class="card">
-        <h2>🌬 風</h2>
-        <p>平均風速：<span id="windSpeed">--</span></p>
-        <p>風向：<span id="windDirection">--</span></p>
+        <h2>風向</h2>
+        <p class="main-value" id="windDirection">--</p>
+        <p class="unit" id="windDirectionText">--</p>
       </div>
 
       <div class="card">
-        <h2>🌊 潮</h2>
-        <p>潮名：<span id="tideName">中潮</span></p>
-        <p>満潮：<span id="highTide">09:24</span></p>
-        <p>干潮：<span id="lowTide">15:48</span></p>
+        <h2>気温</h2>
+        <p class="main-value" id="temperature">--</p>
+        <p class="unit">℃</p>
       </div>
 
-      <div class="card memo">
-        <h2>📝 海育メモ</h2>
-        <p id="memoText">海の状況を確認しています。</p>
+      <div class="card">
+        <h2>潮</h2>
+        <p class="main-value" id="tideName">中潮</p>
+        <p class="unit">参考表示</p>
       </div>
+
+      <div class="card">
+        <h2>波高</h2>
+        <p class="main-value" id="waveHeight">--</p>
+        <p class="unit">m</p>
+      </div>
+
+      <div class="card">
+        <h2>日没</h2>
+        <p class="main-value" id="sunset">--:--</p>
+        <p class="unit">帰着時間に注意</p>
+      </div>
+    </section>
+
+    <section class="memo-card">
+      <h2>海育メモ</h2>
+      <p id="memoText">海の状況を確認しています。</p>
+    </section>
+
+    <section class="chart-card">
+      <h2>風速予測 これから5時間</h2>
+      <canvas id="windSpeedChart" width="600" height="240"></canvas>
+    </section>
+
+    <section class="chart-card">
+      <h2>風向変化 これから5時間</h2>
+      <canvas id="windDirectionChart" width="600" height="240"></canvas>
+    </section>
+
+    <section class="note">
+      <p>
+        ※このアプリは海へ出る判断を補助するものです。最終判断は、現地の空、風、波、指導者・安全管理者の確認を優先してください。
+      </p>
     </section>
   </main>
 
