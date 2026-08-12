@@ -312,9 +312,17 @@ function calculateSeaScore(weather, marine) {
     label
   };
 }
+
 function renderMemo(weather, marine) {
-  const memo = createUmiikuMemo(weather, marine);
-  document.getElementById("memoText").textContent = memo;
+  try {
+    const memo = createUmiikuMemo(weather, marine);
+    document.getElementById("memoText").textContent = memo;
+  } catch (error) {
+    console.error("Memo error", error);
+
+    document.getElementById("memoText").textContent =
+      "海況コメントを生成できませんでした。風・波・降水予報を確認し、安全を最優先に判断してください。";
+  }
 }
 
 function createUmiikuMemo(weather, marine) {
@@ -365,6 +373,12 @@ function createUmiikuMemo(weather, marine) {
     }
   }
 
+  if (
+  !weather.nextHours ||
+  weather.nextHours.length === 0
+) {
+  return "予報データを取得中です。風・波・降水予報を確認し、安全を最優先に判断してください。";
+}
   const futureWind = weather.nextHours
     .map(item => item.windSpeed)
     .filter(v => v !== null);
