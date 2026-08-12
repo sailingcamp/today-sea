@@ -66,14 +66,18 @@ button {
   margin-top: 16px;
 }
 
-.card,
-.memo-card,
-.chart-card,
-.note {
+.card {
   background: white;
-  padding: 18px;
-  border-radius: 20px;
-  box-shadow: 0 10px 24px rgba(0, 100, 130, 0.12);
+  border-radius: 18px;
+  padding: 14px;
+
+  min-height: 135px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
 .card h2,
@@ -86,16 +90,18 @@ button {
 
 .main-value {
   margin: 0;
-  font-size: 34px;
-  font-weight: 900;
-  line-height: 1.1;
+
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .unit {
-  margin: 6px 0 0;
-  color: #55788a;
-  font-size: 15px;
-  font-weight: 700;
+  margin-top: 6px;
+
+  font-size: 14px;
+
+  color: #666;
 }
 
 .memo-card,
@@ -123,7 +129,7 @@ canvas {
   }
 
   .dashboard {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
 
