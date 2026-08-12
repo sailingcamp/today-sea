@@ -146,6 +146,8 @@ async function fetchMarine(latitude, longitude) {
 
 function renderCurrent(weather, marine) {
   document.getElementById("windSpeed").textContent = valueOrDash(weather.windSpeed);
+  document.getElementById("windGust").textContent =
+  `最大 ${valueOrDash(weather.windGust)} m/s`;
   document.getElementById("windDirection").textContent = valueOrDash(weather.windDirection);
   document.getElementById("windDirectionText").textContent =
     `${degreeToDirection(weather.windDirection)} / ${weather.windDirection}°`;
