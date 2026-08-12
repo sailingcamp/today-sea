@@ -155,7 +155,17 @@ document.getElementById("windDirectionText").textContent =
   document.getElementById("temperature").textContent = valueOrDash(weather.temperature);
   document.getElementById("waveHeight").textContent = valueOrDash(marine.waveHeight);
   document.getElementById("sunset").textContent = weather.sunset || "--:--";
+const daylight =
+  getDaylightStatus(
+    weather.sunrise,
+    weather.sunset
+  );
 
+document.getElementById("sunsetCountdown").textContent =
+  daylight.detail;
+
+document.getElementById("sunset").textContent =
+  daylight.title;
   document.getElementById("tideName").textContent = "中潮";
 
   renderSeaScore(weather, marine);
@@ -326,6 +336,66 @@ function calculateDirectionChange(directions) {
   }
 
   return Math.round(maxChange);
+}
+
+function getDaylightStatus(sunriseStr, sunsetStr) {
+
+  const now = new Date();
+
+  const [sunriseHour, sunriseMin] =
+    sunriseStr.split(":").map(Number);
+
+  const [sunsetHour, sunsetMin] =
+    sunsetStr.split(":").map(Number);
+
+  const sunrise = new Date();
+  sunrise.setHours(sunriseHour, sunriseMin, 0, 0);
+
+  const sunset = new Date();
+  sunset.setHours(sunsetHour, sunsetMin, 0, 0);
+
+  // 日の出前
+  if (now < sunrise) {
+
+    const diff =
+      Math.floor((sunrise - now) / 60000);
+
+    const h = Math.floor(diff / 60);
+    const m = diff % 60;
+
+    return {
+      title: `日の出まで`,
+      detail: `${h}時間${m}分`
+    };
+  }
+
+  // 日中
+  if (now < sunset) {
+
+    const diff =
+      Math.floor((sunset - now) / 60000);
+
+    const h = Math.floor(diff / 60);
+    const m = diff % 60;
+
+    return {
+      title: `活動可能`,
+      detail: `あと${h}時間${m}分`
+    };
+  }
+
+  // 日没後
+
+  const diff =
+    Math.floor((now - sunset) / 60000);
+
+  const h = Math.floor(diff / 60);
+  const m = diff % 60;
+
+  return {
+    title: `夜間`,
+    detail: `${h}時間${m}分経過`
+  };
 }
 
 function buildNextHours(hourly, startIndex, count) {
