@@ -153,6 +153,8 @@ function renderCurrent(weather, marine) {
   document.getElementById("sunset").textContent = weather.sunset || "--:--";
 
   document.getElementById("tideName").textContent = "中潮";
+
+  renderSeaScore(weather, marine);
 }
 
 function renderMemo(weather, marine) {
