@@ -71,25 +71,17 @@ async function loadSeaData(location) {
     renderMemo(weather, marine);
 drawChart(
   "windSpeedChart",
-
   weather.nextHours.map(x => x.time),
-
   weather.nextHours.map(x => x.windSpeed),
-
   "風速",
-
   "#0ea5c6"
 );
 
 drawChart(
   "windDirectionChart",
-
   weather.nextHours.map(x => x.time),
-
   weather.nextHours.map(x => x.windDirection),
-
   "風向",
-
   "#f59e0b"
 );
 
