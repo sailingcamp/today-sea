@@ -167,36 +167,38 @@ async function fetchMarine(latitude, longitude) {
 }
 
 function renderCurrent(weather, marine) {
-document.getElementById("windSpeed").textContent =
-  `${valueOrDash(weather.windSpeed)} / ${valueOrDash(weather.windGust)}`;
-document.getElementById("windDirection").textContent =
-  degreeToDirection(weather.windDirection);
-document.getElementById("windDirectionText").textContent =
-  `${weather.windDirection}°`;
-  document.getElementById("temperature").textContent = valueOrDash(weather.temperature);
-  document.getElementById("waveHeight").textContent = valueOrDash(marine.waveHeight);
-const daylight =
-  getDaylightStatus(
+  document.getElementById("windSpeed").textContent =
+    `${valueOrDash(weather.windSpeed)} / ${valueOrDash(weather.windGust)}`;
+
+  document.getElementById("windDirection").textContent =
+    degreeToDirection(weather.windDirection);
+
+  document.getElementById("windDirectionText").textContent =
+    weather.windDirection !== null && weather.windDirection !== undefined
+      ? `${weather.windDirection}°`
+      : "--";
+
+  document.getElementById("temperature").textContent =
+    valueOrDash(weather.temperature);
+
+  document.getElementById("waveHeight").textContent =
+    valueOrDash(marine.waveHeight);
+
+  const daylight = getDaylightStatus(
     weather.sunrise,
     weather.sunset
   );
 
-document.getElementById("sunsetCountdown").textContent =
-  daylight.detail;
+  document.getElementById("sunsetCountdown").textContent =
+    daylight.countdown;
 
-document.getElementById("sunset").textContent =
-  daylight.title;
+  document.getElementById("sunset").textContent =
+    daylight.info;
 
-document.getElementById("sunsetCountdown").textContent =
-  daylight.detail;
-
-document.getElementById("sunset").textContent =
-  daylight.title;
   document.getElementById("tideName").textContent = "中潮";
 
   renderSeaScore(weather, marine);
 }
-
 function renderSeaScore(weather, marine) {
   const result = calculateSeaScore(weather, marine);
 
@@ -365,8 +367,12 @@ function calculateDirectionChange(directions) {
 }
 
 function getDaylightStatus(sunriseStr, sunsetStr) {
-
-function getDaylightStatus(sunriseStr, sunsetStr) {
+  if (!sunriseStr || !sunsetStr) {
+    return {
+      countdown: "--",
+      info: "日出・日没データなし"
+    };
+  }
 
   const now = new Date();
 
@@ -383,10 +389,7 @@ function getDaylightStatus(sunriseStr, sunsetStr) {
   sunset.setHours(sunsetHour, sunsetMin, 0, 0);
 
   if (now < sunrise) {
-
-    const diff =
-      Math.floor((sunrise - now) / 60000);
-
+    const diff = Math.floor((sunrise - now) / 60000);
     const h = Math.floor(diff / 60);
     const m = diff % 60;
 
@@ -397,10 +400,7 @@ function getDaylightStatus(sunriseStr, sunsetStr) {
   }
 
   if (now < sunset) {
-
-    const diff =
-      Math.floor((sunset - now) / 60000);
-
+    const diff = Math.floor((sunset - now) / 60000);
     const h = Math.floor(diff / 60);
     const m = diff % 60;
 
@@ -410,15 +410,13 @@ function getDaylightStatus(sunriseStr, sunsetStr) {
     };
   }
 
-  const diff =
-    Math.floor((now - sunset) / 60000);
-
+  const diff = Math.floor((now - sunset) / 60000);
   const h = Math.floor(diff / 60);
   const m = diff % 60;
 
   return {
     countdown: `${h}時間${m}分経過`,
-    info: `日の出 ${sunriseStr}`
+    info: `日没 ${sunsetStr}`
   };
 }
 
