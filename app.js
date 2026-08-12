@@ -132,6 +132,18 @@ return {
   windSpeed: round(data.current.wind_speed_10m),
   windGust: round(data.current.wind_gusts_10m),
   windDirection: data.current.wind_direction_10m,
+
+  precipitationNow:
+    data.hourly.precipitation_probability[currentIndex],
+
+  precipitation3h:
+    data.hourly.precipitation_probability[
+      Math.min(
+        currentIndex + 3,
+        data.hourly.time.length - 1
+      )
+    ],
+
   sunrise: formatTime(data.daily.sunrise[0]),
   sunset: formatTime(data.daily.sunset[0]),
   nextHours: nextHours
