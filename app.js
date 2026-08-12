@@ -12,8 +12,8 @@ const PRESET_LOCATIONS = {
   }
   zamami: {
     name: "座間味（阿真）",
-    latitude: 35.2870,
-    longitude: 139.5120
+    latitude: 26.224728,
+    longitude: 127.290709
   }
 };
 
