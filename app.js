@@ -196,7 +196,7 @@ function renderCurrent(weather, marine) {
     daylight.info;
 
   document.getElementById("tideName").textContent = "中潮";
-　document.getElementById("tideInfo").textContent =
+  document.getElementById("tideInfo").textContent =
   "満潮 13:24";
 
   renderSeaScore(weather, marine);
