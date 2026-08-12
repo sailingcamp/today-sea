@@ -675,17 +675,32 @@ function drawChart(canvasId, labels, values, label, color) {
             color: "#e2f3f8"
           }
         },
-y: {
-  min: 0,
-  max: Math.ceil(Math.max(...cleanValues)),
-  ticks: {
-    stepSize: 1,
-    color: "#55788a"
-  },
-  grid: {
-    color: "#e2f3f8"
-  }
-}
+y: canvasId === "windDirectionChart"
+  ? {
+      min: 0,
+      max: 360,
+      ticks: {
+        stepSize: 45,
+        color: "#55788a"
+      },
+      grid: {
+        color: "#e2f3f8"
+      }
+    }
+  : {
+      min: 0,
+      max: Math.max(
+        5,
+        Math.ceil(Math.max(...cleanValues))
+      ),
+      ticks: {
+        stepSize: 1,
+        color: "#55788a"
+      },
+      grid: {
+        color: "#e2f3f8"
+      }
+    }
       }
     }
   });
