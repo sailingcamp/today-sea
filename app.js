@@ -329,7 +329,7 @@ function renderMemo(weather, marine) {
       "海況コメントを生成できませんでした。風・波・降水・活動時間を確認し、安全を最優先に判断してください。";
   }
 }
-``
+
 function createUmiikuMemo(weather, marine) {
   const daylightRisk =
     getDaylightRisk(
