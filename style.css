@@ -169,11 +169,7 @@ button {
   border-radius: 18px;
   padding: 16px;
   margin-top: 16px;
-  margin-bottom: 40px;
-
-  display: block;
-  clear: both;
-
+  color: #06394a;
   box-shadow: 0 6px 12px rgba(0, 100, 130, 0.10);
 }
 
@@ -189,6 +185,7 @@ button {
   margin: 0;
   line-height: 1.8;
   font-size: 16px;
+  color: #06394a;
 }
 
 .chart-card {
