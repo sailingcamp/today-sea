@@ -12,6 +12,9 @@ const PRESET_LOCATIONS = {
   }
 };
 
+const DEFAULT_LOCATION =
+  PRESET_LOCATIONS.hayama;
+
 document.addEventListener("DOMContentLoaded", () => {
   updateTime();
 
