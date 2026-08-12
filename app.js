@@ -85,7 +85,7 @@ async function fetchWeather(latitude, longitude) {
   const params = new URLSearchParams({
     latitude: latitude,
     longitude: longitude,
-    current: "temperature_2m,wind_speed_10m,wind_direction_10m",
+    current: "temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m",
     hourly: "temperature_2m,wind_speed_10m,wind_direction_10m",
     daily: "sunset",
     timezone: "Asia/Tokyo",
@@ -106,13 +106,14 @@ async function fetchWeather(latitude, longitude) {
   const currentIndex = findCurrentIndex(data.hourly.time, currentTime);
   const nextHours = buildNextHours(data.hourly, currentIndex, 5);
 
-  return {
-    temperature: round(data.current.temperature_2m),
-    windSpeed: round(data.current.wind_speed_10m),
-    windDirection: data.current.wind_direction_10m,
-    sunset: formatTime(data.daily.sunset[0]),
-    nextHours: nextHours
-  };
+return {
+  temperature: round(data.current.temperature_2m),
+  windSpeed: round(data.current.wind_speed_10m),
+  windGust: round(data.current.wind_gusts_10m),
+  windDirection: data.current.wind_direction_10m,
+  sunset: formatTime(data.daily.sunset[0]),
+  nextHours: nextHours
+};
 }
 
 async function fetchMarine(latitude, longitude) {
