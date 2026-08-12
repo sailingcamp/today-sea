@@ -175,12 +175,17 @@ document.getElementById("windDirectionText").textContent =
   `${weather.windDirection}°`;
   document.getElementById("temperature").textContent = valueOrDash(weather.temperature);
   document.getElementById("waveHeight").textContent = valueOrDash(marine.waveHeight);
-  document.getElementById("sunset").textContent = weather.sunset || "--:--";
 const daylight =
   getDaylightStatus(
     weather.sunrise,
     weather.sunset
   );
+
+document.getElementById("sunsetCountdown").textContent =
+  daylight.detail;
+
+document.getElementById("sunset").textContent =
+  daylight.title;
 
 document.getElementById("sunsetCountdown").textContent =
   daylight.detail;
