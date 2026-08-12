@@ -1,4 +1,4 @@
-const CACHE_NAME = "today-sea-v3";
+const CACHE_NAME = "today-sea-v4";
 
 const APP_FILES = [
   "./",
