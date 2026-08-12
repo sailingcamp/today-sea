@@ -316,15 +316,20 @@ function calculateSeaScore(weather, marine) {
 function renderMemo(weather, marine) {
   try {
     const memo = createUmiikuMemo(weather, marine);
-    document.getElementById("memoText").textContent = memo;
+
+    document.getElementById("memoText").textContent =
+      memo && memo.trim()
+        ? memo
+        : "海況コメントを生成できませんでした。風・波・降水・活動時間を確認し、安全を最優先に判断してください。";
+
   } catch (error) {
     console.error("Memo error", error);
 
     document.getElementById("memoText").textContent =
-      "海況コメントを生成できませんでした。風・波・降水予報を確認し、安全を最優先に判断してください。";
+      "海況コメントを生成できませんでした。風・波・降水・活動時間を確認し、安全を最優先に判断してください。";
   }
 }
-
+``
 function createUmiikuMemo(weather, marine) {
   const daylightRisk =
     getDaylightRisk(
@@ -394,50 +399,6 @@ function createUmiikuMemo(weather, marine) {
   const directionChange = calculateDirectionChange(futureDirections);
 
   let parts = [];
-
-  // 活動時間外は専用メッセージ
-if (daylightRisk.prohibited) {
-
-  if (daylightRisk.label.includes("日の出前")) {
-
-    return `
-まだ活動時間前です。
-
-現在の海況は参考情報としてご覧ください。
-
-日の出後も風や波は変化する可能性があります。
-
-出艇前には最新の海況を確認し、安全を最優先に判断しましょう。
-`.trim();
-
-  }
-
-  if (
-    daylightRisk.label.includes("日没1時間以内")
-  ) {
-
-    return `
-本日の海の活動時間は残りわずかです。
-
-安全のため、新たな出艇はおすすめしません。
-
-明日の風速・風向・降水予報も確認しながら、次回の活動計画を立てておきましょう。
-`.trim();
-
-  }
-
-  if (daylightRisk.label.includes("日没後")) {
-
-    return `
-本日の海の活動時間は終了しました。
-
-夜間は海況の変化を確認しにくくなるため、海上活動は行わないようにしましょう。
-
-明日の海況を確認し、次回の活動準備を進めておくと安心です。
-`.trim();
-
-  }
-}
 
   if (wind < 3) {
     parts.push("現在の風は穏やかです。初心者でも海の様子を観察しながら活動しやすいコンディションです。");
