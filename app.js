@@ -193,6 +193,9 @@ function renderCurrent(weather, marine) {
   document.getElementById("temperature").textContent =
     valueOrDash(weather.temperature);
 
+  document.getElementById("precipitation").textContent =
+  `${weather.precipitationNow} → ${weather.precipitation3h}`;
+  
   document.getElementById("waveHeight").textContent =
     valueOrDash(marine.waveHeight);
 
@@ -206,10 +209,6 @@ function renderCurrent(weather, marine) {
 
   document.getElementById("sunset").textContent =
     daylight.info;
-
-  document.getElementById("tideName").textContent = "中潮";
-  document.getElementById("tideInfo").textContent =
-  "満潮 13:24";
 
   renderSeaScore(weather, marine);
 }
