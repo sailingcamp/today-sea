@@ -12,18 +12,29 @@ icon.svg
 
 <body>
   <main class="app">
-    <section class="hero">
-      <p class="label">海育プロジェクト</p>
-      <h1>今日の海</h1>
+<section class="hero">
+  <p class="label">海育プロジェクト</p>
+  <h1>今日の海</h1>
+
+  <div class="hero-main">
+    <div>
       <p class="place" id="placeName">葉山</p>
       <p class="time" id="currentTime">--</p>
       <p class="status" id="statusText">海の状況を確認しています</p>
+    </div>
 
-      <div class="buttons">
-        <button id="gpsButton">現在地で見る</button>
-        <button id="hayamaButton">葉山で見る</button>
-      </div>
-    </section>
+    <div class="sea-score-box">
+      <p class="score-label">今日の海スコア</p>
+      <p class="score-value"><span id="seaScore">--</span><span class="score-unit">点</span></p>
+      <p class="score-text" id="seaScoreText">判定中</p>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button id="gpsButton">現在地で見る</button>
+    <button id="hayamaButton">葉山で見る</button>
+  </div>
+</section>
 
     <section class="dashboard">
       <div class="card">
