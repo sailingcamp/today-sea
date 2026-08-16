@@ -353,7 +353,7 @@ function calculateSeaScore(weather, marine) {
 }
 
 function renderWarnings(warnings) {
-
+console.log("warnings", warnings);
   const element = document.getElementById("warningList");
 
   if (!warnings || warnings.length === 0) {
