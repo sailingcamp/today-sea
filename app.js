@@ -656,8 +656,7 @@ function drawChart(canvasId, labels, values, label, color) {
           backgroundColor: color,
           tension: 0.35,
           borderWidth: 3,
-          pointRadius: 3,
-          pointStyle: 'line',
+          pointRadius: 4,
           pointHoverRadius: 6
         }
       ]
@@ -668,9 +667,6 @@ options: {
   plugins: {
     legend: {
       display: true,
-      labels: {
-        usePointStyle: true
-      }
     }
   },
       scales: {
