@@ -351,14 +351,11 @@ function calculateSeaScore(weather, marine) {
 
 function renderWarnings(warnings) {
 
-  console.log(
-    "warnings",
-    JSON.stringify(warnings, null, 2)
-  );
+  console.log(warnings);
 
   document.getElementById("warningList").innerHTML = `
     <div class="safe-message">
-      データ取得成功
+      🟢 気象庁データ取得成功
     </div>
   `;
 }
