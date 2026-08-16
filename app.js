@@ -4,7 +4,7 @@ const PRESET_LOCATIONS = {
     latitude: 35.2792,
     longitude: 139.5533,
     warningCode: "140000"
-  },fjso
+  },
 
   enoshima: {
     name: "江の島（Ｂ１海面）",
