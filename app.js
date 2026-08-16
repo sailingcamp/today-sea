@@ -59,12 +59,9 @@ async function loadSeaData(location) {
 
     renderCurrent(weather, marine);
     renderMemo(weather, marine);
-drawChart(
+drawWindChart(
   "windSpeedChart",
-  weather.nextHours.map(x => x.time),
-  weather.nextHours.map(x => x.windSpeed),
-  "風速",
-  "#0ea5c6"
+  weather.nextHours
 );
 
 drawChart(
@@ -89,7 +86,7 @@ async function fetchWeather(latitude, longitude) {
     latitude: latitude,
     longitude: longitude,
     current: "temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m",
-   hourly: "temperature_2m,wind_speed_10m,wind_direction_10m,precipitation_probability",
+    hourly: "temperature_2m,wind_speed_10m,wind_gusts_10m,wind_direction_10m,precipitation_probability",
     daily: "sunrise,sunset",
     timezone: "Asia/Tokyo",
     forecast_days: "2",
@@ -595,12 +592,13 @@ function buildNextHours(hourly, startIndex, count) {
 
     if (!hourly.time[index]) break;
 
-    result.push({
-      time: formatHour(hourly.time[index]),
-      windSpeed: round(hourly.wind_speed_10m[index]),
-      windDirection: hourly.wind_direction_10m[index],
-      temperature: round(hourly.temperature_2m[index])
-    });
+result.push({
+  time: formatHour(hourly.time[index]),
+  windSpeed: round(hourly.wind_speed_10m[index]),
+  windGust: round(hourly.wind_gusts_10m[index]),
+  windDirection: hourly.wind_direction_10m[index],
+  temperature: round(hourly.temperature_2m[index])
+});
   }
 
   return result;
@@ -706,6 +704,74 @@ y: canvasId === "windDirectionChart"
         color: "#e2f3f8"
       }
     }
+      }
+    }
+  });
+}
+
+function drawWindChart(canvasId, data) {
+
+  const canvas = document.getElementById(canvasId);
+
+  if (chartInstances[canvasId]) {
+    chartInstances[canvasId].destroy();
+  }
+
+  const labels = data.map(x => x.time);
+
+  const avgWind = data.map(x => x.windSpeed);
+  const maxWind = data.map(x => x.windGust);
+
+  const ymax = Math.max(
+    5,
+    Math.ceil(
+      Math.max(
+        ...avgWind,
+        ...maxWind
+      )
+    )
+  );
+
+  chartInstances[canvasId] = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "平均",
+          data: avgWind,
+          borderColor: "#0ea5c6",
+          backgroundColor: "#0ea5c6",
+          borderWidth: 3,
+          tension: 0.35
+        },
+        {
+          label: "最大",
+          data: maxWind,
+          borderColor: "#ef4444",
+          backgroundColor: "#ef4444",
+          borderWidth: 2,
+          borderDash: [6,4],
+          tension: 0.35
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true
+        }
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: ymax,
+          ticks: {
+            stepSize: 1
+          }
+        }
       }
     }
   });
