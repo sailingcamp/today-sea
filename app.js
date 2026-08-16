@@ -666,7 +666,7 @@ options: {
   maintainAspectRatio: false,
   plugins: {
     legend: {
-      display: true,
+      display: false,
     }
   },
       scales: {
