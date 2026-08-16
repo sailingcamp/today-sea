@@ -172,7 +172,21 @@ async function fetchWarnings(code) {
 
     const response = await fetch(url);
 
-    if (!response
+    if (!response.ok) {
+      return [];
+    }
+
+    const data = await response.json();
+
+    return data;
+
+  } catch (error) {
+
+    console.error("warning error", error);
+
+    return [];
+  }
+}
 
 function renderCurrent(weather, marine) {
   document.getElementById("windSpeed").textContent =
@@ -338,7 +352,10 @@ function renderSeaScore(weather, marine) {
 
 function renderWarnings(warnings) {
 
-  console.log("warnings", warnings);
+  console.log(
+    "warnings",
+    JSON.stringify(warnings, null, 2)
+  );
 
   document.getElementById("warningList").innerHTML = `
     <div class="safe-message">
