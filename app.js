@@ -4,7 +4,7 @@ const PRESET_LOCATIONS = {
     latitude: 35.2792,
     longitude: 139.5533,
     warningCode: "140000"
-  },
+  },fjso
 
   enoshima: {
     name: "江の島（Ｂ１海面）",
@@ -170,7 +170,7 @@ async function fetchWarnings(code) {
   try {
 
 const url =
-  `https://www.jma.go.jp/bosai/warning/data/warning/${code}.json`; {
+  `https://www.jma.go.jp/bosai/warning/data/warning/${code}.json`; 
 
   const response = await fetch(url);
 
