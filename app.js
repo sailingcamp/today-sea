@@ -761,7 +761,7 @@ function drawWindChart(canvasId, data) {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          display: true
+          display: false
         }
       },
       scales: {
