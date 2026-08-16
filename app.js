@@ -351,11 +351,23 @@ function calculateSeaScore(weather, marine) {
 
 function renderWarnings(warnings) {
 
-  console.log(warnings);
+  const element =
+    document.getElementById("warningList");
 
-  document.getElementById("warningList").innerHTML = `
+  if (!warnings || warnings.length === 0) {
+
+    element.innerHTML = `
+      <div class="safe-message">
+        🟢 情報なし
+      </div>
+    `;
+
+    return;
+  }
+
+  element.innerHTML = `
     <div class="safe-message">
-      🟢 気象庁データ取得成功
+      ✅ 気象庁データ取得成功
     </div>
   `;
 }
