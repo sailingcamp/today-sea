@@ -106,6 +106,29 @@ button {
   background: white;
 }
 
+.alert-card {
+  background: white;
+  border-radius: 18px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 6px 12px rgba(0,100,130,0.10);
+}
+
+.alert-card h2 {
+  margin: 0 0 12px;
+  color: #005f7a;
+}
+
+.safe-message {
+  color: #0f9d58;
+  font-weight: 700;
+}
+
+.warning-message {
+  color: #d97706;
+  font-weight: 700;
+}
+
 #locationSelect {
   width: 100%;
   border: none;
