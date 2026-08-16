@@ -351,14 +351,13 @@ function calculateSeaScore(weather, marine) {
 
 function renderWarnings(warnings) {
 
-  const element =
-    document.getElementById("warningList");
+  const element = document.getElementById("warningList");
 
   if (!warnings || warnings.length === 0) {
 
     element.innerHTML = `
       <div class="safe-message">
-        🟢 情報なし
+        🟢 現在警報・注意報はありません
       </div>
     `;
 
@@ -366,8 +365,8 @@ function renderWarnings(warnings) {
   }
 
   element.innerHTML = `
-    <div class="safe-message">
-      ✅ 気象庁データ取得成功
+    <div class="warning-message">
+      ⚠ 気象庁データ取得成功
     </div>
   `;
 }
