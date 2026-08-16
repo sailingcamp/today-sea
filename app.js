@@ -348,10 +348,6 @@ function calculateSeaScore(weather, marine) {
   };
 }
 
-function renderSeaScore(weather, marine) {
-  ...
-}
-
 function renderWarnings(warnings) {
 
   console.log(
@@ -364,10 +360,6 @@ function renderWarnings(warnings) {
       データ取得成功
     </div>
   `;
-}
-
-function renderMemo(weather, marine) {
-  ...
 }
 
 function renderMemo(weather, marine) {
