@@ -80,12 +80,12 @@ drawChart(
 );
 
     setStatus("更新しました");
-  } catch (error) {
-    console.error(error);
-    setStatus("データを取得できませんでした");
-    document.getElementById("memoText").textContent =
-      "データを取得できませんでした。現地の空、風、波の様子を確認し、安全を最優先に判断してください。";
-  }
+} catch (error) {
+  console.error("loadSeaData error", error);
+  setStatus("データを取得できませんでした");
+  document.getElementById("memoText").textContent =
+    error.message;
+}
 }
 
 async function fetchWeather(latitude, longitude) {
