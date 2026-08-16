@@ -57,8 +57,10 @@ async function loadSeaData(location) {
     const weather = await fetchWeather(location.latitude, location.longitude);
     const marine = await fetchMarine(location.latitude, location.longitude);
 
-    renderCurrent(weather, marine);
-    renderMemo(weather, marine);
+renderCurrent(weather, marine);
+renderWarnings();
+renderMemo(weather, marine);
+    
 drawWindChart(
   "windSpeedChart",
   weather.nextHours
@@ -313,6 +315,23 @@ function calculateSeaScore(weather, marine) {
     score,
     label
   };
+}
+
+function renderSeaScore(weather, marine) {
+  ...
+}
+
+function renderWarnings() {
+
+  document.getElementById("warningList").innerHTML = `
+    <div class="safe-message">
+      🟢 現在警報・注意報はありません
+    </div>
+  `;
+}
+
+function renderMemo(weather, marine) {
+  ...
 }
 
 function renderMemo(weather, marine) {
