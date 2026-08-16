@@ -99,7 +99,8 @@ async function fetchWeather(latitude, longitude) {
     wind_speed_unit: "ms"
   });
 
-  const url = `https://api.open-meteo.com/v1/forecast?${params.toString()}`;
+const url =
+  `https://api.open-meteo.com/v1/forecast?${params.toString()}`;
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -144,7 +145,8 @@ async function fetchMarine(latitude, longitude) {
     forecast_days: "2"
   });
 
-  const url = `https://marine-api.open-meteo.com/v1/marine?${params.toString()}`;
+const url =
+  `https://api.open-meteo.com/v1/forecast?${params.toString()}`;
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -167,10 +169,10 @@ async function fetchWarnings(code) {
 
   try {
 
-    const url =
-      `https://www.jma.go.jp/bosai/warning/data/warning/${code}.json`;
+const url =
+  `https://www.jma.go.jp/bosai/warning/data/warning/${code}.json`; {
 
-    const response = await fetch(url);
+  const response = await fetch(url);
 
     if (!response.ok) {
       return [];
