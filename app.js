@@ -2,18 +2,21 @@ const PRESET_LOCATIONS = {
   hayama: {
     name: "葉山（E海面）",
     latitude: 35.2792,
-    longitude: 139.5533
+    longitude: 139.5533,
+    warningCode: "140000"
   },
 
   enoshima: {
     name: "江の島（Ｂ１海面）",
     latitude: 35.2870,
-    longitude: 139.5120
+    longitude: 139.5120,
+    warningCode: "140000"
   },
   zamami: {
     name: "座間味（阿真）",
     latitude: 26.224728,
-    longitude: 127.290709
+    longitude: 127.290709,
+    warningCode: "470000"
   },
 };
 
@@ -56,9 +59,10 @@ async function loadSeaData(location) {
 
     const weather = await fetchWeather(location.latitude, location.longitude);
     const marine = await fetchMarine(location.latitude, location.longitude);
+    const warnings = await fetchWarnings(location.warningCode);
 
 renderCurrent(weather, marine);
-renderWarnings();
+renderWarnings(warnings);
 renderMemo(weather, marine);
     
 drawWindChart(
@@ -158,6 +162,17 @@ async function fetchMarine(latitude, longitude) {
     waveHeight: round(data.hourly.wave_height[index])
   };
 }
+
+async function fetchWarnings(code) {
+
+  try {
+
+    const url =
+      `https://www.jma.go.jp/bosai/warning/data/warning/${code}.json`;
+
+    const response = await fetch(url);
+
+    if (!response
 
 function renderCurrent(weather, marine) {
   document.getElementById("windSpeed").textContent =
@@ -321,11 +336,13 @@ function renderSeaScore(weather, marine) {
   ...
 }
 
-function renderWarnings() {
+function renderWarnings(warnings) {
+
+  console.log("warnings", warnings);
 
   document.getElementById("warningList").innerHTML = `
     <div class="safe-message">
-      🟢 現在警報・注意報はありません
+      データ取得成功
     </div>
   `;
 }
