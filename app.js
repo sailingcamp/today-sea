@@ -12,12 +12,13 @@ const PRESET_LOCATIONS = {
     longitude: 139.5120,
     warningCode: "140000"
   },
+
   zamami: {
     name: "座間味（阿真）",
     latitude: 26.224728,
     longitude: 127.290709,
     warningCode: "470000"
-  },
+  }
 };
 
 const DEFAULT_LOCATION =
