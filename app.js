@@ -156,9 +156,12 @@ const url =
     };
   }
 
-  const data = await response.json();
+const data = await response.json();
 
-  const now = new Date();
+console.log("marine data", data);
+
+const now = new Date();
+  
   const index = findCurrentIndexByDate(data.hourly.time, now);
 
   return {
