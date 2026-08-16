@@ -738,7 +738,7 @@ function drawWindChart(canvasId, data) {
       labels,
       datasets: [
         {
-          label: "平均",
+          label: "平均風速",
           data: avgWind,
           borderColor: "#0ea5c6",
           backgroundColor: "#0ea5c6",
@@ -746,7 +746,7 @@ function drawWindChart(canvasId, data) {
           tension: 0.35
         },
         {
-          label: "最大",
+          label: "最大風速",
           data: maxWind,
           borderColor: "#ef4444",
           backgroundColor: "#ef4444",
