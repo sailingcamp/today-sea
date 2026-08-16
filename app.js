@@ -661,23 +661,18 @@ function drawChart(canvasId, labels, values, label, color) {
           pointHoverRadius: 6
         }
       ]
-
-      plugins: {
-  legend: {
-    labels: {
-      usePointStyle: true
+     },
+options: {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: true,
+      labels: {
+        usePointStyle: true
+      }
     }
- 
-      
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false
-        }
-      },
+  },
       scales: {
         x: {
           ticks: {
