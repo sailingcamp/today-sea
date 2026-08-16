@@ -17,7 +17,7 @@ const PRESET_LOCATIONS = {
     name: "座間味（阿真）",
     latitude: 26.224728,
     longitude: 127.290709,
-    warningCode: "140000"
+    warningCode: "471000"
   }
 };
 
@@ -364,11 +364,44 @@ function renderWarnings(warnings) {
     return;
   }
 
-  element.innerHTML = `
-    <div class="warning-message">
-      ⚠ 気象庁データ取得成功
-    </div>
-  `;
+  const activeWarnings = [];
+
+  warnings.forEach(report => {
+    if (!report.areaTypes) return;
+
+    report.areaTypes.forEach(areaType => {
+      if (!areaType.areas) return;
+
+      areaType.areas.forEach(area => {
+        if (!area.warnings) return;
+
+        area.warnings.forEach(warning => {
+          if (warning.status !== "解除") {
+            activeWarnings.push(warning);
+          }
+        });
+      });
+    });
+  });
+
+  if (activeWarnings.length === 0) {
+
+    element.innerHTML = `
+      <div class="safe-message">
+        🟢 現在警報・注意報はありません
+      </div>
+    `;
+
+    return;
+  }
+
+  element.innerHTML = activeWarnings
+    .map(warning => `
+      <div class="warning-message">
+        🟡 警報・注意報コード ${warning.code}：${warning.status}
+      </div>
+    `)
+    .join("");
 }
 
 function renderMemo(weather, marine) {
