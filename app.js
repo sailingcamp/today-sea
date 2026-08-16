@@ -657,7 +657,7 @@ function drawChart(canvasId, labels, values, label, color) {
           tension: 0.35,
           borderWidth: 3,
           pointRadius: 3,
-          pointStyle: 'line'
+          pointStyle: 'line',
           pointHoverRadius: 6
         }
       ]
