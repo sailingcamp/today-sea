@@ -17,7 +17,7 @@ const PRESET_LOCATIONS = {
     name: "座間味（阿真）",
     latitude: 26.224728,
     longitude: 127.290709,
-    warningCode: "470000"
+    warningCode: "140000"
   }
 };
 
