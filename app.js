@@ -996,6 +996,7 @@ document.addEventListener("click", () => {
   document
     .getElementById("menuPanel")
     .classList.add("hidden");
+ });
 });
 
 // ====================================
