@@ -101,7 +101,8 @@ async function fetchWeather(latitude, longitude) {
   });
 
 const url =
-  `https://api.open-meteo.com/v1/forecast?${params.toString()}`;
+  `https://api.open-meteo.com/v1/forecast?${params.toString()}`; 
+
   const response = await fetch(url);
 
   if (!response.ok) {
