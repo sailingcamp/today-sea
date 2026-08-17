@@ -360,49 +360,37 @@ function renderWarnings(warnings) {
   const element =
     document.getElementById("warningList");
 
-  if (!Array.isArray(warnings)) {
-
-    element.innerHTML = `
-      <div class="safe-message">
-        🟢 気象庁データ取得成功
-      </div>
-    `;
-
-    return;
-  }
-
-  if (warnings.length === 0) {
-
-    element.innerHTML = `
-      <div class="safe-message">
-        🟢 現在警報・注意報はありません
-      </div>
-    `;
-
-    return;
-  }
-
-  // 以下既存処理
-}
+  const reports =
+    Array.isArray(warnings)
+      ? warnings
+      : [warnings];
 
   const activeWarnings = [];
 
-  warnings.forEach(report => {
+  reports.forEach(report => {
+
     if (!report.areaTypes) return;
 
     report.areaTypes.forEach(areaType => {
+
       if (!areaType.areas) return;
 
       areaType.areas.forEach(area => {
+
         if (!area.warnings) return;
 
         area.warnings.forEach(warning => {
+
           if (warning.status !== "解除") {
             activeWarnings.push(warning);
           }
+
         });
+
       });
+
     });
+
   });
 
   if (activeWarnings.length === 0) {
@@ -419,10 +407,11 @@ function renderWarnings(warnings) {
   element.innerHTML = activeWarnings
     .map(warning => `
       <div class="warning-message">
-        🟡 警報・注意報コード ${warning.code}：${warning.status}
+        🟡 ${warning.code} : ${warning.status}
       </div>
     `)
     .join("");
+
 }
 
 function renderMemo(weather, marine) {
