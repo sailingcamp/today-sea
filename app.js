@@ -355,21 +355,17 @@ function calculateSeaScore(weather, marine) {
 
 function renderWarnings(warnings) {
 
-  console.log(
-    "warnings json",
-    JSON.stringify(warnings, null, 2)
-  );
-
-}
+  console.log("warnings", warnings);
 
   const element =
     document.getElementById("warningList");
 
   element.innerHTML = `
     <div class="safe-message">
-      🟢 気象庁データ取得成功
+      🟢 現在警報・注意報はありません
     </div>
   `;
+
 }
 
 function renderMemo(weather, marine) {
