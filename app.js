@@ -1011,34 +1011,3 @@ function showModal(title, content) {
 
   document.body.appendChild(overlay);
 }
-
-function showInfoSource() {
-  ...
-}
-
-function showScoreInfo() {
-  ...
-}
-
-function showAbout() {
-  ...
-}
-
-function showModal(title, content) {
-  const overlay = document.createElement("div");
-
-  overlay.innerHTML = `
-    <div class="modal-overlay">
-      <div class="modal-content">
-        <h2>${title}</h2>
-        ${content}
-        <br><br>
-        <button onclick="this.closest('.modal-overlay').remove()">
-          閉じる
-        </button>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(overlay);
-}
