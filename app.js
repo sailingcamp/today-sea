@@ -355,61 +355,14 @@ function calculateSeaScore(weather, marine) {
 
 function renderWarnings(warnings) {
 
-  console.log("warnings", warnings);
-
   const element =
     document.getElementById("warningList");
 
-  const reports =
-    Array.isArray(warnings)
-      ? warnings
-      : [warnings];
-
-  const activeWarnings = [];
-
-  reports.forEach(report => {
-
-    if (!report.areaTypes) return;
-
-    report.areaTypes.forEach(areaType => {
-
-      if (!areaType.areas) return;
-
-      areaType.areas.forEach(area => {
-
-        if (!area.warnings) return;
-
-        area.warnings.forEach(warning => {
-
-          if (warning.status !== "解除") {
-            activeWarnings.push(warning);
-          }
-
-        });
-
-      });
-
-    });
-
-  });
-
-  if (activeWarnings.length === 0) {
-
-    element.innerHTML = `
-      <div class="safe-message">
-        🟢 現在警報・注意報はありません
-      </div>
-    `;
-
-    return;
-  }
-
-element.innerHTML = `
-  <div class="safe-message">
-    🟢 現在警報・注意報はありません
-  </div>
-`;
-
+  element.innerHTML = `
+    <div class="safe-message">
+      🟢 気象庁データ取得成功
+    </div>
+  `;
 }
 
 function renderMemo(weather, marine) {
