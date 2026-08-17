@@ -59,6 +59,31 @@ body {
   background: #f3f4f6;
 }
 
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,.5);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2000;
+}
+
+.modal-content {
+  width: min(500px, 90vw);
+
+  max-height: 80vh;
+  overflow: auto;
+
+  background: white;
+  border-radius: 16px;
+
+  padding: 20px;
+}
+
 .hidden {
   display: none;
 }
