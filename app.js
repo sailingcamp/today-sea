@@ -988,15 +988,21 @@ function showAbout() {
 document.getElementById("menuBtn")
   .addEventListener("click", (e) => {
     e.stopPropagation();
+
+    document
+      .getElementById("menuPanel")
+      .classList.toggle("hidden");
+});
+
 document.getElementById("menuPanel")
   .addEventListener("click", (e) => {
     e.stopPropagation();
-  });
+});
+
 document.addEventListener("click", () => {
   document
     .getElementById("menuPanel")
     .classList.add("hidden");
- });
 });
 
 // ====================================
