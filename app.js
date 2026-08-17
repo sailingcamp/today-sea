@@ -354,10 +354,24 @@ function calculateSeaScore(weather, marine) {
 }
 
 function renderWarnings(warnings) {
-console.log("warnings", warnings);
-  const element = document.getElementById("warningList");
 
-  if (!warnings || warnings.length === 0) {
+  console.log("warnings", warnings);
+
+  const element =
+    document.getElementById("warningList");
+
+  if (!Array.isArray(warnings)) {
+
+    element.innerHTML = `
+      <div class="safe-message">
+        🟢 気象庁データ取得成功
+      </div>
+    `;
+
+    return;
+  }
+
+  if (warnings.length === 0) {
 
     element.innerHTML = `
       <div class="safe-message">
@@ -367,6 +381,9 @@ console.log("warnings", warnings);
 
     return;
   }
+
+  // 以下既存処理
+}
 
   const activeWarnings = [];
 
