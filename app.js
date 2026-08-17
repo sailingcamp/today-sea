@@ -404,13 +404,11 @@ function renderWarnings(warnings) {
     return;
   }
 
-  element.innerHTML = activeWarnings
-    .map(warning => `
-      <div class="warning-message">
-        🟡 ${warning.code} : ${warning.status}
-      </div>
-    `)
-    .join("");
+element.innerHTML = `
+  <div class="safe-message">
+    🟢 現在警報・注意報はありません
+  </div>
+`;
 
 }
 
