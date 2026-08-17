@@ -355,6 +355,13 @@ function calculateSeaScore(weather, marine) {
 
 function renderWarnings(warnings) {
 
+  console.log(
+    "warnings json",
+    JSON.stringify(warnings, null, 2)
+  );
+
+}
+
   const element =
     document.getElementById("warningList");
 
