@@ -910,3 +910,135 @@ function valueOrDash(value) {
 function setStatus(text) {
   document.getElementById("statusText").textContent = text;
 }
+
+function showInfoSource() {
+  showModal(
+    "情報ソース",
+    `
+    <p>
+    本アプリでは以下の公開データを利用しています。
+    </p>
+
+    <ul>
+      <li>Open-Meteo Weather</li>
+      <li>Open-Meteo Marine</li>
+      <li>気象庁 警報・注意報</li>
+    </ul>
+
+    <p>
+    各データは参考情報です。
+    海へ出る際は現地確認および指導者・安全管理者の判断を優先してください。
+    </p>
+    `
+  );
+}
+
+function showScoreInfo() {
+  showModal(
+    "海況スコアについて",
+    `
+    <p>
+    海況スコアは、海のコンディションを分かりやすく把握するための参考指標です。
+    </p>
+
+    <ul>
+      <li>風速</li>
+      <li>波高</li>
+      <li>降水確率</li>
+      <li>警報・注意報</li>
+    </ul>
+
+    <p>
+    などの情報をもとに独自に算出しています。
+    </p>
+
+    <p>
+    スコアは海へ出てもよいことを保証するものではありません。
+    海況を理解するための目安としてご利用ください。
+    </p>
+    `
+  );
+}
+
+function showAbout() {
+  showModal(
+    "アプリについて",
+    `
+    <p>
+    「今日の海」は海育プロジェクトが運営する海況確認アプリです。
+    </p>
+
+    <p>
+    セーリングや海洋活動を行う子どもたち、
+    保護者、指導者が海へ出る前に海況を確認するための補助ツールとして開発しました。
+    </p>
+
+    <p>
+    本アプリは判断を代替するものではありません。
+    海へ出る際は、現地の状況および安全管理者の判断を最優先してください。
+    </p>
+    `
+  );
+}
+
+// ====================================
+// メニュー開閉
+// ====================================
+
+document.getElementById("menuBtn").addEventListener("click", () => {
+  document.getElementById("menuPanel").classList.toggle("hidden");
+});
+
+// ====================================
+// モーダル表示
+// ====================================
+
+function showModal(title, content) {
+  const overlay = document.createElement("div");
+
+  overlay.innerHTML = `
+    <div class="modal-overlay">
+      <div class="modal-content">
+        <h2>${title}</h2>
+        ${content}
+        <br><br>
+        <button onclick="this.closest('.modal-overlay').remove()">
+          閉じる
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+}
+
+function showInfoSource() {
+  ...
+}
+
+function showScoreInfo() {
+  ...
+}
+
+function showAbout() {
+  ...
+}
+
+function showModal(title, content) {
+  const overlay = document.createElement("div");
+
+  overlay.innerHTML = `
+    <div class="modal-overlay">
+      <div class="modal-content">
+        <h2>${title}</h2>
+        ${content}
+        <br><br>
+        <button onclick="this.closest('.modal-overlay').remove()">
+          閉じる
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+}
