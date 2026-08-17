@@ -159,8 +159,6 @@ const url =
 
 const data = await response.json();
 
-console.log("marine data", data);
-
 const now = new Date();
   
   const index = findCurrentIndexByDate(data.hourly.time, now);
@@ -355,8 +353,6 @@ function calculateSeaScore(weather, marine) {
 
 function renderWarnings(warnings) {
 
-  console.log("warnings", warnings);
-
   const element =
     document.getElementById("warningList");
 
@@ -372,8 +368,6 @@ function renderMemo(weather, marine) {
   try {
     const memo = createUmiikuMemo(weather, marine);
 
-    console.log("memo", memo);
-
     document.getElementById("memoText").textContent =
       memo || "メモなし";
 
@@ -386,8 +380,6 @@ function renderMemo(weather, marine) {
 }
 
 function createUmiikuMemo(weather, marine) {
-console.log("weather", weather);
-console.log("marine", marine);
   const daylightRisk =
     getDaylightRisk(
       weather.sunrise,
