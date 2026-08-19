@@ -289,7 +289,6 @@ button {
 }
 
 .chart-card {
-  height: 220px;
   overflow: hidden;
 }
 
@@ -369,7 +368,6 @@ button {
   }
 
   .chart-card {
-    height: 190px;
     overflow: hidden;
   }
 
