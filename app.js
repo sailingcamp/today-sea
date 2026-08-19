@@ -1004,7 +1004,6 @@ document.addEventListener("click", () => {
     .getElementById("menuPanel")
     .classList.add("hidden");
 });
-});
 
 // ====================================
 // モーダル表示
