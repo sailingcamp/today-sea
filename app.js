@@ -71,12 +71,8 @@ drawWindChart(
   weather.nextHours
 );
 
-drawChart(
-  "windDirectionChart",
-  weather.nextHours.map(x => x.time),
-  weather.nextHours.map(x => x.windDirection),
-  "風向",
-  "#f59e0b"
+renderWindDirectionTable(
+  weather.nextHours
 );
 
     setStatus("更新しました");
@@ -822,6 +818,41 @@ function drawWindChart(canvasId, data) {
   });
 }
 
+function renderWindDirectionTable(data) {
+
+  const container =
+    document.getElementById(
+      "windDirectionTable"
+    );
+
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+
+  data.forEach(item => {
+
+    container.innerHTML += `
+      <div class="wind-hour">
+
+        <div class="wind-time">
+          ${item.time}
+        </div>
+
+        <div class="wind-arrow">
+          ${degreeToArrow(item.windDirection)}
+        </div>
+
+        <div class="wind-degree">
+          ${Math.round(item.windDirection)}°
+        </div>
+
+      </div>
+    `;
+  });
+}
+
 function findCurrentIndex(times, currentTime) {
   if (!times || times.length === 0) return 0;
 
@@ -872,6 +903,23 @@ function degreeToDirection(degree) {
 
   const index = Math.round(degree / 22.5) % 16;
   return directions[index];
+}
+
+function degreeToArrow(deg) {
+
+  if (deg === null || deg === undefined) {
+    return "・";
+  }
+
+  if (deg >= 337.5 || deg < 22.5) return "↑";
+  if (deg < 67.5) return "↗";
+  if (deg < 112.5) return "→";
+  if (deg < 157.5) return "↘";
+  if (deg < 202.5) return "↓";
+  if (deg < 247.5) return "↙";
+  if (deg < 292.5) return "←";
+
+  return "↖";
 }
 
 function formatTime(value) {
